@@ -16,6 +16,11 @@ map("n", "<leader>gt", ":DiffviewToggleFile<CR>", { desc = "Git File History" })
 map("n", "<leader>ft", "<cmd>TodoTelescope<CR>", { desc = "Find Todo" })
 map("n", "<c-j>", "<cmd>:TmuxNavigateDown<cr>", { desc = "Tmux Down" })
 
+--Split
+
+map("n", "\\","<cmd>:vsplit <CR>", {desc= "Vertical split window"})
+
+
 -- Trouble
 
 map("n", "<leader>qx", "<cmd>TroubleToggle<CR>", { desc = "Open Trouble" })

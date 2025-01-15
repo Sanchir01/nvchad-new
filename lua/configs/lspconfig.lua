@@ -40,7 +40,7 @@ for _, lsp in ipairs(servers) do
   lspconfig.prismals.setup {}
   lspconfig.volar.setup {
     on_attach = on_attach,
-    filetypes = { "typescript", "javascript", "vue" },
+    filetypes = { "vue" },
     init_options = {
       vue = {
         hybridMode = false,

@@ -2,7 +2,9 @@ return {
   {
     "stevearc/conform.nvim",
     event = "BufWritePre",
-    opts = require "configs.conform",
+   config = function ()
+     require ("configs.conform")
+   end,
   },
   {
     "windwp/nvim-ts-autotag",
@@ -76,7 +78,23 @@ return {
     "folke/trouble.nvim",
     lazy = false,
     dependencies = { "nvim-tree/nvim-web-devicons" },
-  },
+    },
+  {
+  "nvim-tree/nvim-tree.lua",
+  dependencies = { "nvim-tree/nvim-web-devicons" },
+  lazy = false,
+  config = function()
+    require("nvim-tree").setup({
+      
+      view = {
+        adaptive_size = true,
+      },
+      renderer = {
+        group_empty = true,
+      },
+    })
+  end,
+},
   {
     "mfussenegger/nvim-lint",
     event = "VeryLazy",
