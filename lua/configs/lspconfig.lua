@@ -7,7 +7,7 @@ local capabilities = configs.capabilities
 local lspconfig = require "lspconfig"
 
 -- if you just want default config for the servers then put them in a table
-local servers = { "html", "cssls", "ts_ls", "clangd", "gopls", "gradle_ls", "volar", "prismals" ,"graphql"}
+local servers = { "html", "cssls", "ts_ls", "clangd", "gopls", "gradle_ls", "volar", "prismals" ,"graphql","tailwindcss"}
 
 local function organize_imports()
   local params = {
@@ -55,4 +55,18 @@ for _, lsp in ipairs(servers) do
       },
     },
   }
+  lspconfig.tailwindcss.setup {
+  on_attach = on_attach,
+  capabilities = capabilities,
+  settings = {
+    tailwindCSS = {
+      experimental = {
+        classRegex = {
+          { "clsx\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)" }, -- для динамических классов
+        },
+      },
+    },
+  },
+  filetypes = { "html", "css", "scss", "javascript", "javascriptreact", "typescript", "typescriptreact", "vue" },
+}
 end
