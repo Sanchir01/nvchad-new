@@ -7,9 +7,24 @@ local options = {
     typescript = { "prettierd" },
     typescriptreact = { "prettierd" },
     javascriptreact = { "prettierd" },
+    python={"isort","black"},
     go={"gofumpt" }
   },
-
+  formatters = {
+    black = {
+      prepend_args = {
+          "--fast",
+          "--line-length",
+          "80",
+        },
+      },
+      sort = {
+          prepend_args = {
+            "--profile",
+            "black",
+      },
+    },
+  },
   format_on_save = {
     -- These options will be passed to conform.format()
     timeout_ms = 500,

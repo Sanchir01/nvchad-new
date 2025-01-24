@@ -19,6 +19,12 @@ return {
     opts = {},
   },
   {
+    "mfussenegger/nvim-lint",
+    config = function ()
+      require('configs.lint')
+    end
+  },
+  {
     "catgoose/nvim-colorizer.lua",
     event = "BufReadPre",
     config = function()
@@ -42,6 +48,7 @@ return {
         "prettier",
         "eslint-lsp",
         "gopls",
+        'pyright',
         "js-debug-adapter",
         "eslint_d",
         "prettier",
@@ -112,6 +119,7 @@ return {
       "javascript",
       "typescript",
       "tsx",
+      "python",
       "c",
       "markdown",
       "markdown_inline",
