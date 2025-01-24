@@ -7,7 +7,8 @@ local capabilities = configs.capabilities
 local lspconfig = require "lspconfig"
 
 -- if you just want default config for the servers then put them in a table
-local servers = { "html", "cssls", "ts_ls", "clangd", "gopls", "gradle_ls", "volar", "prismals" ,"graphql","tailwindcss"}
+local servers =
+  { "html", "cssls", "ts_ls", "clangd", "gopls", "gradle_ls", "volar", "prismals", "graphql", "tailwindcss", "pyright" }
 
 local function organize_imports()
   local params = {
@@ -36,15 +37,21 @@ for _, lsp in ipairs(servers) do
         },
       },
     },
-    }
+  }
   lspconfig.graphql.setup {
-  filetypes = { "graphql","graphqls" }, 
-  settings = {
-    graphql = {
-      validate = true, 
+    filetypes = { "graphql", "graphqls" },
+    settings = {
+      graphql = {
+        validate = true,
+      },
     },
-  },
-}
+  }
+  lspconfig.pyright.setup {
+    filetypes = { "py", "python" },
+     python = {
+      pythonPath = "...venv/Scripts/python.exe"
+    },
+  }
   lspconfig.prismals.setup {}
   lspconfig.volar.setup {
     on_attach = on_attach,
@@ -56,17 +63,17 @@ for _, lsp in ipairs(servers) do
     },
   }
   lspconfig.tailwindcss.setup {
-  on_attach = on_attach,
-  capabilities = capabilities,
-  settings = {
-    tailwindCSS = {
-      experimental = {
-        classRegex = {
-          { "clsx\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)" }, -- для динамических классов
+    on_attach = on_attach,
+    capabilities = capabilities,
+    settings = {
+      tailwindCSS = {
+        experimental = {
+          classRegex = {
+            { "clsx\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)" }, -- для динамических классов
+          },
         },
       },
     },
-  },
-  filetypes = { "html", "css", "scss", "javascript", "javascriptreact", "typescript", "typescriptreact", "vue" },
-}
+    filetypes = { "html", "css", "scss", "javascriptreact", "typescriptreact", "vue" },
+  }
 end

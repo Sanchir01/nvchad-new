@@ -7,7 +7,8 @@ local options = {
     typescript = { "prettier" },
     typescriptreact = { "prettier" },
     javascriptreact = { "prettier" },
-    go={"gofumpt" }
+    go={"gofumpt" },
+    python={"isort","black"}
   },
 
   format_on_save = {
