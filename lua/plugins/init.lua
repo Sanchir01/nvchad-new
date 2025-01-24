@@ -2,9 +2,9 @@ return {
   {
     "stevearc/conform.nvim",
     event = "BufWritePre",
-   config = function ()
-     require ("configs.conform")
-   end,
+    config = function()
+      require "configs.conform"
+    end,
   },
   {
     "windwp/nvim-ts-autotag",
@@ -46,17 +46,28 @@ return {
         "html-lsp",
         "css-lsp",
         "prettier",
+        "eslint_d",
         "eslint-lsp",
         "gopls",
         'pyright',
         "js-debug-adapter",
         "eslint_d",
         "prettier",
+        "mymy",
+        "ruff",
         "gopls",
+        "pyright",
         "node-debug2-adapter",
         "typescript-language-server",
       },
     },
+  },
+  {
+    "mfussenegger/nvim-lint",
+    event = { "BufWritePre", "BufReadPre" },
+    config = function()
+      require "configs.lint"
+    end,
   },
   {
     "stevearc/dressing.nvim",
@@ -85,23 +96,23 @@ return {
     "folke/trouble.nvim",
     lazy = false,
     dependencies = { "nvim-tree/nvim-web-devicons" },
-    },
+  },
   {
-  "nvim-tree/nvim-tree.lua",
-  dependencies = { "nvim-tree/nvim-web-devicons" },
-  lazy = false,
-  config = function()
-    require("nvim-tree").setup({
-      
-      view = {
-        adaptive_size = true,
-      },
-      renderer = {
-        group_empty = true,
-      },
-    })
-  end,
-},
+    "nvim-tree/nvim-tree.lua",
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+    lazy = false,
+    config = function()
+      require("nvim-tree").setup {
+
+        view = {
+          adaptive_size = true,
+        },
+        renderer = {
+          group_empty = true,
+        },
+      }
+    end,
+  },
   {
     "mfussenegger/nvim-lint",
     event = "VeryLazy",

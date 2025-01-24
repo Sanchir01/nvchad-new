@@ -36,12 +36,13 @@ for _, lsp in ipairs(servers) do
         },
       },
     },
-    }
+  }
   lspconfig.graphql.setup {
-  filetypes = { "graphql","graphqls" }, 
-  settings = {
-    graphql = {
-      validate = true, 
+    filetypes = { "graphql", "graphqls" },
+    settings = {
+      graphql = {
+        validate = true,
+      },
     },
   },
     }
@@ -49,7 +50,7 @@ for _, lsp in ipairs(servers) do
     filetypes={"python","py"},
      settings = {
     python = {
-      pythonPath = ".venv/**/python", -- Укажите путь к вашему venv
+      pythonPath = ".venv/**/python.exe"
     },
   },
   }
@@ -64,17 +65,17 @@ for _, lsp in ipairs(servers) do
     },
   }
   lspconfig.tailwindcss.setup {
-  on_attach = on_attach,
-  capabilities = capabilities,
-  settings = {
-    tailwindCSS = {
-      experimental = {
-        classRegex = {
-          { "clsx\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)" }, -- для динамических классов
+    on_attach = on_attach,
+    capabilities = capabilities,
+    settings = {
+      tailwindCSS = {
+        experimental = {
+          classRegex = {
+            { "clsx\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)" }, -- для динамических классов
+          },
         },
       },
     },
-  },
-  filetypes = { "html", "css", "scss", "javascript", "javascriptreact", "typescript", "typescriptreact", "vue" },
-}
+    filetypes = { "html", "css", "scss", "javascriptreact", "typescriptreact", "vue" },
+  }
 end
