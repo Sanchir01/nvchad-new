@@ -6,6 +6,11 @@ local lazypath = vim.fn.stdpath "data" .. "/lazy/lazy.nvim"
 
 vim.opt.shell = "pwsh"
 
+vim.o.foldcolumn = "1" 
+vim.o.foldlevel = 99 
+vim.o.foldlevelstart = 99
+vim.o.foldenable = true
+
 if not vim.uv.fs_stat(lazypath) then
   local repo = "https://github.com/folke/lazy.nvim.git"
   vim.fn.system { "git", "clone", "--filter=blob:none", repo, "--branch=stable", lazypath }

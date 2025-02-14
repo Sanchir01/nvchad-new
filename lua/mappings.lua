@@ -1,7 +1,5 @@
 require "nvchad.mappings"
 
--- add yours here
-
 local map = vim.keymap.set
 
 map("n", ";", ":", { desc = "CMD enter command mode" })
@@ -18,8 +16,7 @@ map("n", "<c-j>", "<cmd>:TmuxNavigateDown<cr>", { desc = "Tmux Down" })
 
 --Split
 
-map("n", "\\","<cmd>:vsplit <CR>", {desc= "Vertical split window"})
-
+map("n", "\\", "<cmd>:vsplit <CR>", { desc = "Vertical split window" })
 
 -- Trouble
 
@@ -50,4 +47,17 @@ end, { desc = "Toogle Terminal Horizontal" })
 map("t", "<C-f>", function()
   require("nvchad.term").toggle { pos = "float" }
 end, { desc = "Toogle Terminal Float" })
+
+-- Folding
+-- map("n", "zR", function()
+--   require("ufo").openAllFolds()
+-- end, { desc = "Развернуть все блоки" })
+--
+-- map("n", "zM", function()
+--   require("ufo").closeAllFolds()
+-- end, { desc = "Свернуть все блоки" })
+-- map('n', 'za', function() require("ufo").openFoldsExceptKinds({ "comment" }) end, {desc="Открыть 1 уровень"})
+-- map("n", "zm", function() require("ufo").closeFoldsWith(1) end, { desc = "Свернуть 1 уровень" })
+-- map('n', 'zo', function() require("ufo").openFoldsExceptKinds() end, {desc="Открыть на ме сте курсора 1 уровень"})
+
 -- map({ "n", "i", "v" }, "<C-s>", "<cmd> w <cr>")

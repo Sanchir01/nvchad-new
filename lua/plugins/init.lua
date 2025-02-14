@@ -6,6 +6,19 @@ return {
       require "configs.conform"
     end,
   },
+
+  {
+    "rmagatti/auto-session",
+    lazy = false,
+
+    ---@module "auto-session"
+    ---@type AutoSession.Config
+    opts = {
+      suppressed_dirs = { "~/", "~/Projects", "~/Downloads", "/" },
+      log_level = "debug",
+    },
+  },
+
   {
     "windwp/nvim-ts-autotag",
     event = "VeryLazy",
@@ -13,16 +26,11 @@ return {
       require("nvim-ts-autotag").setup()
     end,
   },
+
   {
     "stevearc/dressing.nvim",
     lazy = false,
     opts = {},
-  },
-  {
-    "mfussenegger/nvim-lint",
-    config = function ()
-      require('configs.lint')
-    end
   },
   {
     "catgoose/nvim-colorizer.lua",
@@ -49,7 +57,7 @@ return {
         "eslint_d",
         "eslint-lsp",
         "gopls",
-        'pyright',
+        "pyright",
         "js-debug-adapter",
         "eslint_d",
         "prettier",
@@ -121,6 +129,67 @@ return {
     end,
   },
   {
+    "kevinhwang91/nvim-ufo",
+    requires = "kevinhwang91/promise-async",
+    event = "VeryLazy",
+    opts = {
+      open_fold_hl_timeout = 400,
+      preview = {
+        win_config = {
+          border = { "", "─", "", "", "", "─", "", "" },
+          winblend = 0,
+        },
+        mappings = {
+          scrollU = "<C-u>",
+          scrollD = "<C-d>",
+          jumpTop = "[",
+          jumpBot = "]",
+        },
+      },
+    },
+    config = function(_, opts)
+      local handler = function(virtText, lnum, endLnum, width, truncate)
+        local newVirtText = {}
+        local totalLines = vim.api.nvim_buf_line_count(0)
+        local foldedLines = endLnum - lnum
+        local suffix = ("  %d %d%%"):format(foldedLines, foldedLines / totalLines * 100)
+        local sufWidth = vim.fn.strdisplaywidth(suffix)
+        local targetWidth = width - sufWidth
+        local curWidth = 0
+        for _, chunk in ipairs(virtText) do
+          local chunkText = chunk[1]
+          local chunkWidth = vim.fn.strdisplaywidth(chunkText)
+          if targetWidth > curWidth + chunkWidth then
+            table.insert(newVirtText, chunk)
+          else
+            chunkText = truncate(chunkText, targetWidth - curWidth)
+            local hlGroup = chunk[2]
+            table.insert(newVirtText, { chunkText, hlGroup })
+            chunkWidth = vim.fn.strdisplaywidth(chunkText)
+            if curWidth + chunkWidth < targetWidth then
+              suffix = suffix .. (" "):rep(targetWidth - curWidth - chunkWidth)
+            end
+            break
+          end
+          curWidth = curWidth + chunkWidth
+        end
+        local rAlignAppndx = math.max(math.min(vim.opt.textwidth["_value"], width - 1) - curWidth - sufWidth, 0)
+        suffix = (" "):rep(rAlignAppndx) .. suffix
+        table.insert(newVirtText, { suffix, "MoreMsg" })
+        return newVirtText
+      end
+      opts["fold_virt_text_handler"] = handler
+      require("ufo").setup(opts)
+
+      vim.fn.sign_define("FoldClosed", { text = "▸", texthl = "Folded" })
+      vim.fn.sign_define("FoldOpen", { text = "▾", texthl = "Folded" })
+      vim.fn.sign_define("FoldSeparator", { text = " ", texthl = "Folded" })
+    end,
+  },
+  {
+    "kevinhwang91/promise-async",
+  },
+  {
     "nvim-treesitter/nvim-treesitter",
     ensure_installed = {
       "vim",
@@ -138,6 +207,8 @@ return {
       "vue",
       "go",
     },
+    highlight = { enable = true },
+    fold = { enable = true },
     indent = {
       enable = true,
     },
