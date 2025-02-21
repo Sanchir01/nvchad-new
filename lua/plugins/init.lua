@@ -17,6 +17,9 @@ return {
       suppressed_dirs = { "~/", "~/Projects", "~/Downloads", "/" },
       log_level = "debug",
     },
+    config = function()
+      vim.o.sessionoptions = "buffers,curdir,folds,help,tabpages,winsize,localoptions"
+    end,
   },
 
   {
