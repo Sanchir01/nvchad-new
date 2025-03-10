@@ -7,10 +7,13 @@ return {
     end,
   },
   {
-  'mrcjkb/rustaceanvim',
-  version = '^5', 
-  lazy = false, 
-},
+    "mrcjkb/rustaceanvim",
+    version = "^5",
+    lazy = false,
+  },
+  {
+    "github/copilot.vim",
+  },
   {
     "rmagatti/auto-session",
     lazy = false,

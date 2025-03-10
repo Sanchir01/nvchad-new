@@ -49,15 +49,28 @@ map("t", "<C-f>", function()
 end, { desc = "Toogle Terminal Float" })
 
 -- Folding
--- map("n", "zR", function()
---   require("ufo").openAllFolds()
--- end, { desc = "Развернуть все блоки" })
---
--- map("n", "zM", function()
---   require("ufo").closeAllFolds()
--- end, { desc = "Свернуть все блоки" })
--- map('n', 'za', function() require("ufo").openFoldsExceptKinds({ "comment" }) end, {desc="Открыть 1 уровень"})
--- map("n", "zm", function() require("ufo").closeFoldsWith(1) end, { desc = "Свернуть 1 уровень" })
--- map('n', 'zo', function() require("ufo").openFoldsExceptKinds() end, {desc="Открыть на ме сте курсора 1 уровень"})
+map("n", "zR", function()
+  require("ufo").openAllFolds()
+end, { desc = "Развернуть все блоки" })
 
+map("n", "zM", function()
+  require("ufo").closeAllFolds()
+end, { desc = "Свернуть все блоки" })
+map('n', 'za', function() require("ufo").openFoldsExceptKinds({ "comment" }) end, {desc="Открыть 1 уровень"})
+map("n", "zm", function() require("ufo").closeFoldsWith(1) end, { desc = "Свернуть 1 уровень" })
+map('n', 'zo', function() require("ufo").openFoldsExceptKinds() end, {desc="Открыть на ме сте курсора 1 уровень"})
+
+
+-- Rust
+map("n", "<leader>a", "<cmd>RustLsp codeAction<CR>", { buffer = bufnr, desc = "Rust Code Actions" })
+
+-- Hover actions
+map("n", "K", "<cmd>RustLsp hover actions<CR>", { buffer = bufnr, desc = "Rust Hover Actions" })
+
+map("n", "<leader>rr", "<cmd>RustLsp runnables<CR>", { buffer = bufnr, desc = "Rust Runnables" })
+map("n", "<leader>rd", "<cmd>RustLsp debuggables<CR>", { buffer = bufnr, desc = "Rust Debuggables" })
+
+-- Copilot
+
+map({"i","n"},"<C-l>",function() require("copilot.suggestion").accept() end, {desc ="Copilot accept"})
 -- map({ "n", "i", "v" }, "<C-s>", "<cmd> w <cr>")

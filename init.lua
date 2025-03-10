@@ -10,7 +10,7 @@ vim.o.foldcolumn = "1"
 vim.o.foldlevel = 99 
 vim.o.foldlevelstart = 99
 vim.o.foldenable = true
-
+vim.g.copilot_no_tab_map = true
 if not vim.uv.fs_stat(lazypath) then
   local repo = "https://github.com/folke/lazy.nvim.git"
   vim.fn.system { "git", "clone", "--filter=blob:none", repo, "--branch=stable", lazypath }
