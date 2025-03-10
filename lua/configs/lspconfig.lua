@@ -8,7 +8,7 @@ local lspconfig = require "lspconfig"
 
 -- if you just want default config for the servers then put them in a table
 local servers =
-  { "html", "cssls", "ts_ls", "clangd", "gopls", "gradle_ls", "volar", "prismals", "graphql", "tailwindcss", "pyright" ,"rust_analyzer"}
+  { "html", "cssls", "ts_ls", "clangd", "gopls", "gradle_ls", "volar", "prismals", "graphql", "tailwindcss", "pyright" ,"rust_analyzer","emmet_language_server"}
 
 local function organize_imports()
   local params = {
@@ -46,7 +46,29 @@ for _, lsp in ipairs(servers) do
       },
     },
   }
-
+    lspconfig.emmet_language_server.setup {
+     filetypes = { "css", "eruby", "html", "javascript", "javascriptreact", "less", "sass", "scss", "pug", "typescriptreact" },
+  init_options = {
+    ---@type table<string, string>
+    includeLanguages = {},
+    --- @type string[]
+    excludeLanguages = {},
+    --- @type string[]
+    extensionsPath = {},
+    --- @type table<string, any> 
+    preferences = {},
+    --- @type boolean 
+    showAbbreviationSuggestions = true,
+    --- @type "always" | "never"
+    showExpandedAbbreviation = "always",
+    --- @type boolean 
+    showSuggestionsAsSnippets = false,
+    --- @type table<string, any> 
+    syntaxProfiles = {},
+    --- @type table<string, string> 
+    variables = {},
+  },
+  }
   lspconfig.pyright.setup {
     filetypes = { "python", "py" },
     settings = {
