@@ -7,7 +7,8 @@ local capabilities = configs.capabilities
 local lspconfig = require "lspconfig"
 
 -- if you just want default config for the servers then put them in a table
-local servers = { "html", "cssls", "ts_ls", "clangd", "gopls", "gradle_ls", "volar", "prismals" ,"graphql","tailwindcss","pyright"}
+local servers =
+  { "html", "cssls", "ts_ls", "clangd", "gopls", "gradle_ls", "volar", "prismals", "graphql", "tailwindcss", "pyright" ,"rust_analyzer"}
 
 local function organize_imports()
   local params = {
@@ -15,7 +16,7 @@ local function organize_imports()
     arguments = { vim.api.nvim_buf_get_name(0) },
   }
   vim.lsp.buf.execute_command(params)
-end
+end 
 
 for _, lsp in ipairs(servers) do
   lspconfig[lsp].setup {
@@ -44,19 +45,23 @@ for _, lsp in ipairs(servers) do
         validate = true,
       },
     },
-  },
-    }
-    lspconfig.pyright.setup {
-    filetypes={"python","py"},
-     settings = {
-    python = {
-      pythonPath = ".venv/**/python.exe"
+  }
+
+  lspconfig.pyright.setup {
+    filetypes = { "python", "py" },
+    settings = {
+      python = {
+        pythonPath = ".venv/**/python.exe",
+        analysis = {
+          autoSearchPaths = true,
+          useLibraryCodeForTypes = true,
+          diagnosticMode = "workspace",
+        },
+      },
     },
-  },
   }
   lspconfig.prismals.setup {}
   lspconfig.volar.setup {
-    on_attach = on_attach,
     filetypes = { "vue" },
     init_options = {
       vue = {
@@ -65,8 +70,6 @@ for _, lsp in ipairs(servers) do
     },
   }
   lspconfig.tailwindcss.setup {
-    on_attach = on_attach,
-    capabilities = capabilities,
     settings = {
       tailwindCSS = {
         experimental = {
