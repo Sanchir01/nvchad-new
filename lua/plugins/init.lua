@@ -216,6 +216,7 @@ return {
       "prisma",
       "vue",
       "go",
+      "rust"
     },
     highlight = { enable = true },
     fold = { enable = true },

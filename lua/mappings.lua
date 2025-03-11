@@ -72,5 +72,5 @@ map("n", "<leader>rd", "<cmd>RustLsp debuggables<CR>", { buffer = bufnr, desc = 
 
 -- Copilot
 
-map({"i","n"},"<C-l>",function() require("copilot.suggestion").accept() end, {desc ="Copilot accept"})
+map({"i","n"},"<leaderc>cs",function() require("copilot.suggestion").accept() end, {desc ="Copilot accept"})
 -- map({ "n", "i", "v" }, "<C-s>", "<cmd> w <cr>")
